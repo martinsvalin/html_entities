@@ -3,6 +3,9 @@ HtmlEntities
 
 Elixir module for decoding HTML entities in a string.
 
+Entity names, codepoints and their corresponding characters are copied from
+[Wikipedia](https://en.wikipedia.org/wiki/List_of_XML_and_HTML_character_entity_references).
+
 ## Usage
 
 ```elixir
