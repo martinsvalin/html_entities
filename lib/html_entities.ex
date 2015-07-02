@@ -1,4 +1,17 @@
 defmodule HtmlEntities do
+  @moduledoc """
+  Decode HTML entities in a string.
+
+  ## Examples
+
+      iex> "Tom &amp; Jerry" |> HtmlEntities.decode
+      "Tom & Jerry"
+      iex> "&#161;Ay, caramba!" |> HtmlEntities.decode
+      "¡Ay, caramba!"
+  """
+
+  @doc "Decode HTML entities in a string."
+  @spec decode(String.t) :: String.t
   def decode(string) do
     Regex.replace(~r/\&[^\s]+;/r, string, &replace_entity/1)
   end
