@@ -2,31 +2,38 @@ defmodule HtmlEntities.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :html_entities,
-     version: "0.0.1",
-     elixir: "~> 1.0",
-     build_embedded: Mix.env == :prod,
-     start_permanent: Mix.env == :prod,
-     deps: deps]
+    [
+      app: :html_entities,
+      version: "0.0.1",
+      name: "HtmlEntities",
+      source_url: "https://github.com/martinsvalin/html_entities",
+      elixir: "~> 1.0",
+      description: description,
+      package: package,
+      deps: deps
+    ]
   end
 
-  # Configuration for the OTP application
-  #
-  # Type `mix help compile.app` for more information
-  def application do
-    [applications: [:logger]]
+  defp description do
+    """
+    Decode HTML entities in a string.
+    """
   end
 
-  # Dependencies can be Hex packages:
-  #
-  #   {:mydep, "~> 0.3.0"}
-  #
-  # Or git/path repositories:
-  #
-  #   {:mydep, git: "https://github.com/elixir-lang/mydep.git", tag: "0.1.0"}
-  #
-  # Type `mix help deps` for more examples and options
+  defp package do
+    [
+      contributors: ["Martin Svalin"],
+      files: ["lib", "mix.exs", "README*", "LICENSE*"],
+      licenses: ["MIT"],
+      links: %{"GitHub" => "https://github.com/martinsvalin/html_entities"}
+    ]
+  end
+
   defp deps do
     []
+  end
+
+  def application do
+    [applications: []]
   end
 end
