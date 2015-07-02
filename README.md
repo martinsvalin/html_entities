@@ -1,7 +1,7 @@
 HtmlEntities
 ============
 
-Decode Html entities in a string.
+Elixir module for decoding HTML entities in a string.
 
 ## Usage
 
