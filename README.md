@@ -8,7 +8,7 @@ Entity names, codepoints and their corresponding characters are copied from
 
 ## Installation
 
-Add the dependency to your `mix.exs`, then run `mix deps.get`.
+Add the dependency to your `mix.exs` file, then run `mix deps.get`.
 
 ```elixir
 defp deps do
