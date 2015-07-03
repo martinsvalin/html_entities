@@ -37,4 +37,6 @@ defmodule HtmlEntities do
   defp replace_entity(_, "#" <> code) do
     << String.to_integer(code) :: utf8 >>
   end
+
+  defp replace_entity(match, _), do: match
 end
