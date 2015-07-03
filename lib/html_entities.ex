@@ -25,12 +25,9 @@ defmodule HtmlEntities do
     :lists.keystore(name, 1, acc, {name, character, String.rstrip(codepoint)})
   end
 
-
   for {name, character, codepoint} <- codes do
-    entity = "&#{name};"
-    codepoint_entity = "&##{codepoint};"
-    defp replace_entity(unquote(entity), _), do: unquote(character)
-    defp replace_entity(unquote(codepoint_entity), _), do: unquote(character)
+    defp replace_entity(_, unquote(name)), do: unquote(character)
+    defp replace_entity(_, unquote(codepoint)), do: unquote(character)
   end
 
   defp replace_entity(_, "#x" <> code) do
