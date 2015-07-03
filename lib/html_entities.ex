@@ -34,8 +34,7 @@ defmodule HtmlEntities do
   end
 
   defp replace_entity(_, "#x" <> code) do
-    {i, _} = Code.eval_string("0x#{code}", [], __ENV__)
-    << i :: utf8 >>
+    << String.to_integer(code, 16) :: utf8 >>
   end
 
   defp replace_entity(_, "#" <> code) do
