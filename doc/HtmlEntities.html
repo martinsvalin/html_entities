@@ -25,7 +25,7 @@
     </script>
 
     <section id="content">
-      <div class="breadcrumbs">HtmlEntities v0.1.0 &rarr; <a href="overview.html">Overview</a> &rarr; <a href="HtmlEntities.html">HtmlEntities</a></div>
+      <div class="breadcrumbs">HtmlEntities v0.2.0 &rarr; <a href="overview.html">Overview</a> &rarr; <a href="HtmlEntities.html">HtmlEntities</a></div>
       <h1>
         HtmlEntities
         
@@ -50,7 +50,9 @@
 <pre><code class="iex elixir">iex&gt; &quot;Tom &amp;amp; Jerry&quot; |&gt; HtmlEntities.decode
 &quot;Tom &amp; Jerry&quot;
 iex&gt; &quot;&amp;#161;Ay, caramba!&quot; |&gt; HtmlEntities.decode
-&quot;¡Ay, caramba!&quot;</code></pre>
+&quot;¡Ay, caramba!&quot;
+iex&gt; &quot;&amp;#337; &amp;#x151;&quot; |&gt; HtmlEntities.decode
+&quot;ő ő&quot;</code></pre>
 
         </section>
       
@@ -100,7 +102,7 @@ iex&gt; &quot;&amp;#161;Ay, caramba!&quot; |&gt; HtmlEntities.decode
 
   </section>
   
-    <a href="https://github.com/martinsvalin/html_entities/blob/master/lib/html_entities.ex#L15" class="view_source">Source</a>
+    <a href="https://github.com/martinsvalin/html_entities/blob/master/lib/html_entities.ex#L17" class="view_source">Source</a>
   
 </section>
 
