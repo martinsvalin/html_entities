@@ -30,13 +30,17 @@ defmodule HtmlEntities do
     defp replace_entity(_, unquote(codepoint)), do: unquote(character)
   end
 
-  defp replace_entity(_, "#x" <> code) do
-    << String.to_integer(code, 16) :: utf8 >>
+  defp replace_entity(original, "#x" <> code) do
+    try do
+      << String.to_integer(code, 16) :: utf8 >>
+    rescue ArgumentError -> original end
   end
 
-  defp replace_entity(_, "#" <> code) do
-    << String.to_integer(code) :: utf8 >>
+  defp replace_entity(original, "#" <> code) do
+    try do
+      << String.to_integer(code) :: utf8 >>
+    rescue ArgumentError -> original end
   end
 
-  defp replace_entity(match, _), do: match
+  defp replace_entity(original, _), do: original
 end

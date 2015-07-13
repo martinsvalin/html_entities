@@ -9,5 +9,7 @@ defmodule HtmlEntitiesTest do
 
   test "Ignores unrecognized entities" do
     assert decode("&nosuchentity;") == "&nosuchentity;"
+    assert decode("&#nosuchentity;") == "&#nosuchentity;"
+    assert decode("&#xxxx;") == "&#xxxx;"
   end
 end
