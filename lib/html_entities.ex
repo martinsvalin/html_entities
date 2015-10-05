@@ -21,8 +21,8 @@ defmodule HtmlEntities do
   end
 
   codes = File.stream!(@external_resource) |> Enum.reduce [], fn(line, acc) ->
-    [name, character, codepoint] = :binary.split(line, ",", [:global])
-    :lists.keystore(name, 1, acc, {name, character, String.rstrip(codepoint)})
+    [name, character, codepoint] = line |> String.rstrip |> String.split ","
+    :lists.keystore(name, 1, acc, {name, character, codepoint})
   end
 
   for {name, character, codepoint} <- codes do
