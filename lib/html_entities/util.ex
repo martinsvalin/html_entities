@@ -15,7 +15,7 @@ defmodule HtmlEntities.Util do
   end
 
   @doc "Convert a list of comma-separated lines to entity definitions."
-  @spec convert_lines_to_entities([String.t]) :: [entity]
+  @spec convert_lines_to_entities([String.t] | File.Stream.t) :: [{String.t, String.t, String.t}]
   def convert_lines_to_entities(lines) do
     Enum.reduce(lines, [], &add_entity_to_list/2)
   end
