@@ -20,10 +20,7 @@ defmodule HtmlEntities do
     Regex.replace(~r/\&([^\s]+);/r, string, &replace_entity/2)
   end
 
-  codes = File.stream!(@external_resource) |> Enum.reduce [], fn(line, acc) ->
-    [name, character, codepoint] = line |> String.rstrip |> String.split ","
-    :lists.keystore(name, 1, acc, {name, character, codepoint})
-  end
+  codes = HtmlEntities.Util.load_entities(@external_resource)
 
   for {name, character, codepoint} <- codes do
     defp replace_entity(_, unquote(name)), do: unquote(character)
