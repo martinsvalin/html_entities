@@ -16,7 +16,7 @@ defmodule HtmlEntities.Mixfile do
 
   defp description do
     """
-    Decode HTML entities in a string.
+    Decode and encode HTML entities in a string.
     """
   end
 
