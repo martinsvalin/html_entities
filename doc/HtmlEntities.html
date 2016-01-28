@@ -71,14 +71,20 @@
 
       
         <section id="moduledoc" class="docstring">
-          <p>Decode HTML entities in a string.</p>
+          <p>Decode and encode HTML entities in a string.</p>
 <h2>Examples</h2>
+<p>Decoding:</p>
 <pre><code class="iex elixir">iex&gt; &quot;Tom &amp;amp; Jerry&quot; |&gt; HtmlEntities.decode
 &quot;Tom &amp; Jerry&quot;
 iex&gt; &quot;&amp;#161;Ay, caramba!&quot; |&gt; HtmlEntities.decode
 &quot;¡Ay, caramba!&quot;
 iex&gt; &quot;&amp;#337; &amp;#x151;&quot; |&gt; HtmlEntities.decode
 &quot;ő ő&quot;</code></pre>
+<p>Encoding:</p>
+<pre><code class="iex elixir">iex&gt; &quot;Tom &amp; Jerry&quot; |&gt; HtmlEntities.encode
+&quot;Tom &amp;amp; Jerry&quot;
+iex&gt; &quot;&lt;&lt; KAPOW!! &gt;&gt;&quot; |&gt; HtmlEntities.encode
+&quot;&amp;lt;&amp;lt; KAPOW!! &amp;gt;&amp;gt;&quot;</code></pre>
 
         </section>
       
@@ -104,6 +110,15 @@ iex&gt; &quot;&amp;#337; &amp;#x151;&quot; |&gt; HtmlEntities.decode
   </div>
   
     <div class="summary-synopsis"><p>Decode HTML entities in a string</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#encode/1">encode(string)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Encode HTML entities in a string</p>
 </div>
   
 </div>
@@ -135,7 +150,7 @@ iex&gt; &quot;&amp;#337; &amp;#x151;&quot; |&gt; HtmlEntities.decode
     </a>
     <span class="signature">decode(string)</span>
       
-      <a href="https://github.com/martinsvalin/html_entities/blob/master/lib/html_entities.ex#L19" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/martinsvalin/html_entities/blob/master/lib/html_entities.ex#L28" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -152,6 +167,33 @@ iex&gt; &quot;&amp;#337; &amp;#x151;&quot; |&gt; HtmlEntities.decode
   
   <section class="docstring">
     <p>Decode HTML entities in a string.</p>
+
+  </section>
+</div>
+<div class="detail" id="encode/1">
+  <div class="detail-header">
+    <a href="#encode/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">encode(string)</span>
+      
+      <a href="https://github.com/martinsvalin/html_entities/blob/master/lib/html_entities.ex#L34" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+  </div>
+  
+    <div class="specs">
+      <h4 class="specs-title">Specs</h4>
+      <div class="specs-list">
+        
+          <pre><code class="elixir">encode(<a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>) :: <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a></code></pre>
+        
+      </div>
+    </div>
+  
+  <section class="docstring">
+    <p>Encode HTML entities in a string.</p>
 
   </section>
 </div>
