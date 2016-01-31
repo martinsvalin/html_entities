@@ -22,7 +22,7 @@ defmodule HtmlEntities.Mixfile do
 
   defp package do
     [
-      maintainers: ["Martin Svalin", "Dávid Kovács"],
+      maintainers: ["Martin Svalin", "Dávid Kovács", "Johan Wärlander"],
       files: ["lib", "mix.exs", "README*", "LICENSE*"],
       licenses: ["MIT"],
       links: %{"GitHub" => "https://github.com/martinsvalin/html_entities"}
