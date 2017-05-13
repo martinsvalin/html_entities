@@ -26,7 +26,7 @@ defmodule HtmlEntities do
   @doc "Decode HTML entities in a string."
   @spec decode(String.t) :: String.t
   def decode(string) do
-    Regex.replace(~r/\&([^\s]+);/r, string, &replace_entity/2)
+    Regex.replace(~r/\&([^\s]+);/U, string, &replace_entity/2)
   end
 
   @doc "Encode HTML entities in a string."
