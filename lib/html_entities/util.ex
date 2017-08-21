@@ -21,7 +21,7 @@ defmodule HtmlEntities.Util do
   end
 
   defp add_entity_to_list(line, list) do
-    [name, character, codepoint] = line |> String.rstrip |> String.split(",")
+    [name, character, codepoint] = line |> String.trim_trailing |> String.split(",")
     :lists.keystore(name, 1, list, {name, character, codepoint})
   end
 end
