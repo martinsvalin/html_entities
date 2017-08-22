@@ -24,4 +24,8 @@ defmodule HtmlEntitiesUtilTest do
       convert_lines_to_entities([""])
     end
   end
+
+  test "Trailing whitespace is removed from entity descriptions" do
+    assert convert_lines_to_entities(["euro,€,8364 \t"]) == [{"euro","€","8364"}]
+  end
 end
