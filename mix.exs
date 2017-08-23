@@ -4,7 +4,7 @@ defmodule HtmlEntities.Mixfile do
   def project do
     [
       app: :html_entities,
-      version: "0.3.0",
+      version: "0.4.0",
       name: "HtmlEntities",
       source_url: "https://github.com/martinsvalin/html_entities",
       elixir: "~> 1.3",
