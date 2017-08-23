@@ -31,8 +31,8 @@ defmodule HtmlEntities.Mixfile do
 
   defp deps do
     [
-      {:earmark, "~> 0.1", only: :dev},
-      {:ex_doc, "~> 0.7", only: :dev}
+      {:earmark, "~> 1.2", only: :dev},
+      {:ex_doc, "~> 0.16", only: :dev}
     ]
   end
 
