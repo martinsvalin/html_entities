@@ -37,6 +37,14 @@ defmodule HtmlEntities do
     |> Enum.join()
   end
 
+  # From https://github.com/rails/rails/blob/master/activesupport%2Flib%2Factive_support%2Fcore_ext%2Fstring%2Foutput_safety.rb
+  @html_escape_once_regexp ~r/["><']|&(?!([a-zA-Z]+|(#\d+)|(#[xX][\dA-Fa-f]+));)/
+  @doc "Encode HTML entities in a string ensuring entities are not double encoded (ex: &amp;amp;)."
+  @spec encode_once(String.t) :: String.t
+  def encode_once(string) do
+    Regex.replace(@html_escape_once_regexp, string, &replace_character/1)
+  end
+
   codes = HtmlEntities.Util.load_entities(@external_resource)
 
   for {name, character, codepoint} <- codes do
@@ -58,7 +66,7 @@ defmodule HtmlEntities do
 
   defp replace_entity(original, _), do: original
 
-  defp replace_character("'"), do: "&apos;"
+  defp replace_character("'"), do: "&#39;"
   defp replace_character("\""), do: "&quot;"
   defp replace_character("&"), do: "&amp;"
   defp replace_character("<"), do: "&lt;"

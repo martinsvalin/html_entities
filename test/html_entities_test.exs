@@ -18,6 +18,10 @@ defmodule HtmlEntitiesTest do
   end
 
   test "Encoding does replace unsafe characters" do
-    assert encode("'\"&<>") == "&apos;&quot;&amp;&lt;&gt;"
+    assert encode("'\"&<>") == "&#39;&quot;&amp;&lt;&gt;"
+  end
+
+  test "encode_once does not double encode entities" do
+    assert encode_once(encode("'\"&<>")) == "&#39;&quot;&amp;&lt;&gt;"
   end
 end
