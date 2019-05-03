@@ -16,6 +16,14 @@ defp deps do
 end
 ```
 
+Ensure html_entities is started before your application:
+
+```elixir
+def application do
+  extra_applications: [..., :html_entities]]
+end
+```
+
 ## Usage
 
 Inside iex:
