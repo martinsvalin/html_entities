@@ -13,6 +13,11 @@ defmodule HtmlEntitiesTest do
     assert decode("&#xxxx;") == "&#xxxx;"
   end
 
+  test "Decoding numbers" do
+    assert decode("perhaps an &#x26;?") == "perhaps an &?"
+    assert decode("perhaps an &#38;?") == "perhaps an &?"
+  end
+
   test "Encoding doesn't replace safe UTF-8 characters" do
     assert encode("AbcÅäö€") == "AbcÅäö€"
   end

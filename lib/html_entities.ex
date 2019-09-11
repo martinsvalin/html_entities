@@ -26,42 +26,58 @@ defmodule HtmlEntities do
   @doc "Decode HTML entities in a string."
   @spec decode(String.t) :: String.t
   def decode(string) do
-    Regex.replace(~r/\&([^\s]+);/U, string, &replace_entity/2)
+    decode(string, "")
   end
 
-  @doc "Encode HTML entities in a string."
-  @spec encode(String.t) :: String.t
-  def encode(string) do
-    String.graphemes(string)
-    |> Enum.map(&replace_character/1)
-    |> Enum.join()
+  defp decode(<<"&", rest::binary>>, acc) do
+    case decode_entity(rest) do
+      {character, rest} -> decode(rest, <<acc::binary, character::binary>>)
+      :error -> decode(rest, <<acc::binary, ?&>>)
+    end
+  end
+
+  defp decode(<<head, rest::binary>>, acc) do
+    decode(rest, <<acc::binary, head>>)
+  end
+
+  defp decode(<<>>, acc) do
+    acc
+  end
+
+  defp decode_entity(<<"#x", c, rest::binary>>) when c in ?0..?9 do
+    case Integer.parse(<<c, rest::binary>>, 16) do
+      {number, ";" <> rest} -> {<<number::utf8>>, rest}
+      _ -> :error
+    end
+  end
+
+  defp decode_entity(<<"#", rest::binary>>) do
+    case Integer.parse(rest, 10) do
+      {number, ";" <> rest} -> {<<number::utf8>>, rest}
+      _ -> :error
+    end
   end
 
   codes = HtmlEntities.Util.load_entities(@external_resource)
 
-  for {name, character, codepoint} <- codes do
-    defp replace_entity(_, unquote(name)), do: unquote(character)
-    defp replace_entity(_, unquote(codepoint)), do: unquote(character)
+  for {name, character, _codepoint} <- codes do
+    defp decode_entity(<<unquote(name), ?;, rest::binary>>), do: {unquote(character), rest}
   end
 
-  defp replace_entity(original, "#x" <> code) do
-    try do
-      << String.to_integer(code, 16) :: utf8 >>
-    rescue ArgumentError -> original end
+  defp decode_entity(_), do: :error
+
+  @doc "Encode HTML entities in a string."
+  @spec encode(String.t) :: String.t
+  def encode(string) do
+    for <<x <- string>>, into: "" do
+      case x do
+        ?' -> "&apos;"
+        ?" -> "&quot;"
+        ?& -> "&amp;"
+        ?< -> "&lt;"
+        ?> -> "&gt;"
+        _ -> <<x>>
+      end
+    end
   end
-
-  defp replace_entity(original, "#" <> code) do
-    try do
-      << String.to_integer(code) :: utf8 >>
-    rescue ArgumentError -> original end
-  end
-
-  defp replace_entity(original, _), do: original
-
-  defp replace_character("'"), do: "&apos;"
-  defp replace_character("\""), do: "&quot;"
-  defp replace_character("&"), do: "&amp;"
-  defp replace_character("<"), do: "&lt;"
-  defp replace_character(">"), do: "&gt;"
-  defp replace_character(original), do: original
 end
