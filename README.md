@@ -45,7 +45,7 @@ end
  - My solution performs really well for most operations required by this simple use, allowing me to put jobs in the background in the same thread to avoid creating a lot of threads increasing the hardware use. I also used Docker to help us with the process of deployment.
 
 **How does your solution scale?**
-  - My solution uses Sideqik which is a faster job system, allowing me to execute jobs effitently jobs in background avoid blocking operations. With that we could have a better use of our Hardware by putting jobs to run in background to avoid long processing operations during request making the user wait longer.
+  - My solution uses Sideqik which is a faster job system, allowing me to execute jobs efficiently in the background. With that we could have a better use of our Hardware by putting jobs to run in background to avoid long processing operations during request making the user wait longer.
  
  **What would you improve next?**
  - I would make a better use of Redis to cache most of the trivial requests, allowing a faster response to the users.
