@@ -4,7 +4,7 @@ defmodule HtmlEntities.Mixfile do
   def project do
     [
       app: :html_entities,
-      version: "0.4.0",
+      version: "0.5.0",
       name: "HtmlEntities",
       source_url: "https://github.com/martinsvalin/html_entities",
       elixir: "~> 1.3",
@@ -31,8 +31,7 @@ defmodule HtmlEntities.Mixfile do
 
   defp deps do
     [
-      {:earmark, "~> 1.2", only: :dev},
-      {:ex_doc, "~> 0.16", only: :dev}
+      {:ex_doc, "~> 0.21", only: :dev}
     ]
   end
 
