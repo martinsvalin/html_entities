@@ -24,7 +24,7 @@ defmodule HtmlEntities do
   @external_resource "lib/html_entities_list.txt"
 
   @doc "Decode HTML entities in a string."
-  @spec decode(String.t) :: String.t
+  @spec decode(String.t()) :: String.t()
   def decode(string) do
     decode(string, "")
   end
@@ -67,7 +67,7 @@ defmodule HtmlEntities do
   defp decode_entity(_), do: :error
 
   @doc "Encode HTML entities in a string."
-  @spec encode(String.t) :: String.t
+  @spec encode(String.t()) :: String.t()
   def encode(string) do
     for <<x <- string>>, into: "" do
       case x do

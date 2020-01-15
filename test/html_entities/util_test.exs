@@ -13,15 +13,17 @@ defmodule HtmlEntitiesUtilTest do
     assert_raise MatchError, fn ->
       convert_line_to_entity("auml,ä,228,foo")
     end
+
     assert_raise MatchError, fn ->
       convert_line_to_entity("auml,ä")
     end
+
     assert_raise MatchError, fn ->
       convert_line_to_entity("")
     end
   end
 
   test "Trailing whitespace is removed from entity descriptions" do
-    assert convert_line_to_entity("euro,€,8364 \t") == {"euro","€","8364"}
+    assert convert_line_to_entity("euro,€,8364 \t") == {"euro", "€", "8364"}
   end
 end

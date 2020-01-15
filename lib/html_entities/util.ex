@@ -6,18 +6,20 @@ defmodule HtmlEntities.Util do
   generation part of HtmlEntities to be as small as possible.
   """
 
-  @type entity :: {String.t, String.t, String.t}
+  @type entity :: {String.t(), String.t(), String.t()}
 
   @doc "Load HTML entities from an external file."
-  @spec load_entities(String.t) :: [entity]
+  @spec load_entities(String.t()) :: [entity]
   def load_entities(filename) do
     File.stream!(filename) |> Enum.map(&convert_line_to_entity/1)
   end
 
   @doc "Converts a line of comma-separated lines to entity definitions."
-  @spec convert_line_to_entity([String.t] | File.Stream.t) :: [{String.t, String.t, String.t}]
+  @spec convert_line_to_entity([String.t()] | File.Stream.t()) :: [
+          {String.t(), String.t(), String.t()}
+        ]
   def convert_line_to_entity(line) do
-    [name, character, codepoint] = line |> String.trim_trailing |> String.split(",")
+    [name, character, codepoint] = line |> String.trim_trailing() |> String.split(",")
     {name, character, codepoint}
   end
 end
