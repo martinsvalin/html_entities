@@ -60,8 +60,10 @@ defmodule HtmlEntities do
 
   codes = HtmlEntities.Util.load_entities(@external_resource)
 
-  for {name, character, _codepoint} <- codes do
-    defp decode_entity(<<unquote(name), ?;, rest::binary>>), do: {unquote(character), rest}
+  for {name, _character, codepoint} <- codes do
+    defp decode_entity(<<unquote(name), ?;, rest::binary>>) do
+      {<<unquote(codepoint)::utf8>>, rest}
+    end
   end
 
   defp decode_entity(_), do: :error

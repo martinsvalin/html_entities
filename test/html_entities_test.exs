@@ -4,6 +4,16 @@ defmodule HtmlEntitiesTest do
   import HtmlEntities
 
   describe "decode/1" do
+    test "named" do
+      assert decode("&amp;&nbsp;&reg;") == "& ®"
+    end
+
+    test "numbers" do
+      assert decode("perhaps an &#x26;?") == "perhaps an &?"
+      assert decode("perhaps an &#38;?") == "perhaps an &?"
+      assert decode("non-breaking&#xa0;space") == "non-breaking space"
+    end
+
     test "handle consecutive entities (non-greedy)" do
       assert decode("&aring;&auml;&ouml;") == "åäö"
     end
@@ -12,12 +22,6 @@ defmodule HtmlEntitiesTest do
       assert decode("&nosuchentity;") == "&nosuchentity;"
       assert decode("&#nosuchentity;") == "&#nosuchentity;"
       assert decode("&#xxxx;") == "&#xxxx;"
-    end
-
-    test "numbers" do
-      assert decode("perhaps an &#x26;?") == "perhaps an &?"
-      assert decode("perhaps an &#38;?") == "perhaps an &?"
-      assert decode("non-breaking&#xa0;space") == "non-breaking space"
     end
   end
 
