@@ -16,6 +16,7 @@ defmodule HtmlEntitiesTest do
   test "Decoding numbers" do
     assert decode("perhaps an &#x26;?") == "perhaps an &?"
     assert decode("perhaps an &#38;?") == "perhaps an &?"
+    assert decode("non-breaking&#xa0;space") == "non-breaking space"
   end
 
   test "Encoding doesn't replace safe UTF-8 characters" do
