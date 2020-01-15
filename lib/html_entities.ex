@@ -49,6 +49,8 @@ defmodule HtmlEntities do
       {number, ";" <> rest} -> {<<number::utf8>>, rest}
       _ -> :error
     end
+  rescue
+    ArgumentError -> :error
   end
 
   defp decode_entity(<<"#", rest::binary>>) do
@@ -56,6 +58,8 @@ defmodule HtmlEntities do
       {number, ";" <> rest} -> {<<number::utf8>>, rest}
       _ -> :error
     end
+  rescue
+    ArgumentError -> :error
   end
 
   codes = HtmlEntities.Util.load_entities(@external_resource)

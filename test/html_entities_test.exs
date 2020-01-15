@@ -23,6 +23,11 @@ defmodule HtmlEntitiesTest do
       assert decode("&#nosuchentity;") == "&#nosuchentity;"
       assert decode("&#xxxx;") == "&#xxxx;"
     end
+
+    test "ignore invalid unicode codepoints" do
+      assert decode("&#55555;") == "&#55555;"
+      assert decode("&#xD903;") == "&#xD903;"
+    end
   end
 
   describe "encode/1" do
