@@ -3,27 +3,31 @@ defmodule HtmlEntitiesTest do
   doctest HtmlEntities
   import HtmlEntities
 
-  test "Decoding handles consecutive entities (non-greedy)" do
-    assert decode("&aring;&auml;&ouml;") == "åäö"
+  describe "decode/1" do
+    test "handle consecutive entities (non-greedy)" do
+      assert decode("&aring;&auml;&ouml;") == "åäö"
+    end
+
+    test "ignore unrecognized entities" do
+      assert decode("&nosuchentity;") == "&nosuchentity;"
+      assert decode("&#nosuchentity;") == "&#nosuchentity;"
+      assert decode("&#xxxx;") == "&#xxxx;"
+    end
+
+    test "numbers" do
+      assert decode("perhaps an &#x26;?") == "perhaps an &?"
+      assert decode("perhaps an &#38;?") == "perhaps an &?"
+      assert decode("non-breaking&#xa0;space") == "non-breaking space"
+    end
   end
 
-  test "Decoding ignores unrecognized entities" do
-    assert decode("&nosuchentity;") == "&nosuchentity;"
-    assert decode("&#nosuchentity;") == "&#nosuchentity;"
-    assert decode("&#xxxx;") == "&#xxxx;"
-  end
+  describe "encode/1" do
+    test "don't replace safe UTF-8 characters" do
+      assert encode("AbcÅäö€") == "AbcÅäö€"
+    end
 
-  test "Decoding numbers" do
-    assert decode("perhaps an &#x26;?") == "perhaps an &?"
-    assert decode("perhaps an &#38;?") == "perhaps an &?"
-    assert decode("non-breaking&#xa0;space") == "non-breaking space"
-  end
-
-  test "Encoding doesn't replace safe UTF-8 characters" do
-    assert encode("AbcÅäö€") == "AbcÅäö€"
-  end
-
-  test "Encoding does replace unsafe characters" do
-    assert encode("'\"&<>") == "&apos;&quot;&amp;&lt;&gt;"
+    test "replace unsafe characters" do
+      assert encode("'\"&<>") == "&apos;&quot;&amp;&lt;&gt;"
+    end
   end
 end
