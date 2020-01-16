@@ -39,4 +39,20 @@ defmodule HtmlEntitiesTest do
       assert encode("'\"&<>") == "&apos;&quot;&amp;&lt;&gt;"
     end
   end
+
+  test "Encoding when existing escaped characters exist" do
+    assert encode("this has both unsafe characters &<> and an existing &amp; entity") ==
+             "this has both unsafe characters &amp;&lt;&gt; and an existing &amp; entity"
+  end
+
+  test "Multiple Encodings of the same string will consistent with one single encoding pass" do
+    original_string = "this has both unsafe characters &<> and an existing &amp; entity"
+
+    first_pass = encode(original_string)
+    second_pass = encode(first_pass)
+    third_pass = encode(second_pass)
+
+    assert first_pass == second_pass
+    assert third_pass == second_pass
+  end
 end

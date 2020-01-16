@@ -75,15 +75,35 @@ defmodule HtmlEntities do
   @doc "Encode HTML entities in a string."
   @spec encode(String.t()) :: String.t()
   def encode(string) do
-    for <<x <- string>>, into: "" do
-      case x do
-        ?' -> "&apos;"
-        ?" -> "&quot;"
-        ?& -> "&amp;"
-        ?< -> "&lt;"
-        ?> -> "&gt;"
-        _ -> <<x>>
-      end
+    encode(string, "")
+  end
+
+  defp encode(<<?&, rest::binary>> = entity, acc) do
+    case entity do
+      <<head::bytes-size(4), remaining::binary>> when head in ["&lt;", "&gt;"] ->
+        encode(remaining, acc <> head)
+
+      <<?&, ?a, ?m, ?p, ?;, remaining::binary>> ->
+        encode(remaining, acc <> "&amp;")
+
+      <<head::bytes-size(6), remaining::binary>> when head in ["&quot;", "&apos;"] ->
+        encode(remaining, acc <> head)
+
+      _ ->
+        encode(rest, acc <> encode_entity(?&))
     end
   end
+
+  defp encode(<<head, rest::binary>>, acc) do
+    encode(rest, acc <> encode_entity(head))
+  end
+
+  defp encode(<<>>, acc), do: acc
+
+  defp encode_entity(?'), do: "&apos;"
+  defp encode_entity(?"), do: "&quot;"
+  defp encode_entity(?&), do: "&amp;"
+  defp encode_entity(?<), do: "&lt;"
+  defp encode_entity(?>), do: "&gt;"
+  defp encode_entity(other), do: <<other>>
 end
