@@ -25,7 +25,7 @@ defmodule HtmlEntities do
 
   @doc "Decode HTML entities in a string."
   @spec decode(String.t()) :: String.t()
-  def decode(string) do
+  def decode(string) when is_binary(string) do
     decode(string, "")
   end
 
@@ -74,7 +74,7 @@ defmodule HtmlEntities do
 
   @doc "Encode HTML entities in a string."
   @spec encode(String.t()) :: String.t()
-  def encode(string) do
+  def encode(string) when is_binary(string) do
     for <<x <- string>>, into: "" do
       case x do
         ?' -> "&apos;"
