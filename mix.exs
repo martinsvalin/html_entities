@@ -31,7 +31,8 @@ defmodule HtmlEntities.Mixfile do
 
   defp deps do
     [
-      {:ex_doc, "~> 0.21", only: :dev}
+      {:ex_doc, "~> 0.21", only: :dev},
+      {:nimble_csv, "~> 0.7", only: :dev}
     ]
   end
 
