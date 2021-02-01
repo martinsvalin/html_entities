@@ -1,16 +1,19 @@
 defmodule HtmlEntities.Mixfile do
   use Mix.Project
 
+  @source_url "https://github.com/martinsvalin/html_entities"
+  @version "0.5.1"
+
   def project do
     [
       app: :html_entities,
-      version: "0.5.1",
+      version: @version,
       name: "HtmlEntities",
-      source_url: "https://github.com/martinsvalin/html_entities",
       elixir: "~> 1.3",
       description: description(),
       package: package(),
-      deps: deps()
+      deps: deps(),
+      docs: docs()
     ]
   end
 
@@ -25,13 +28,22 @@ defmodule HtmlEntities.Mixfile do
       maintainers: ["Martin Svalin", "Dávid Kovács", "Johan Wärlander"],
       files: ["lib", "mix.exs", "README*", "LICENSE*"],
       licenses: ["MIT"],
-      links: %{"GitHub" => "https://github.com/martinsvalin/html_entities"}
+      links: %{"GitHub" => @source_url}
     ]
   end
 
   defp deps do
     [
-      {:ex_doc, "~> 0.21", only: :dev}
+      {:ex_doc, ">= 0.0.0", only: :dev, runtime: false}
+    ]
+  end
+
+  defp docs do
+    [
+      extras: ["README.md"],
+      main: "readme",
+      source_url: @source_url,
+      source_ref: "v#{@version}"
     ]
   end
 
