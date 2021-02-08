@@ -77,7 +77,7 @@ defmodule HtmlEntities do
   def encode(string) when is_binary(string) do
     for <<x <- string>>, into: "" do
       case x do
-        ?' -> "&apos;"
+        ?' -> "&#39;"
         ?" -> "&quot;"
         ?& -> "&amp;"
         ?< -> "&lt;"
