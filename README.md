@@ -18,7 +18,7 @@ Add the dependency to your `mix.exs` file, then run `mix deps.get`.
 ```elixir
 defp deps do
   [
-    {:html_entities, "~> 0.4"}
+    {:html_entities, "~> 0.5"}
   ]
 end
 ```

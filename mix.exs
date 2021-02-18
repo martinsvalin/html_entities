@@ -2,7 +2,7 @@ defmodule HtmlEntities.Mixfile do
   use Mix.Project
 
   @source_url "https://github.com/martinsvalin/html_entities"
-  @version "0.5.1"
+  @version "0.5.2"
 
   def project do
     [
